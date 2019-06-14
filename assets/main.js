@@ -1,3 +1,22 @@
+//when window loads, it initiates all the button functions
+window.onload = function(){
+    //click events
+    $(document).on('click', "#startTimer-btn", function(){
+        //starts timer
+        start();
+    })
+
+    // $(document).on('click', "#reset-btn", function(){
+    //     //resets timer
+    //     reset();
+    // })
+
+    // $(document).on('click', "#pause-btn", function(){
+    //     //resets timer
+    //     pause();
+    // })
+};
+
 // My web app's Firebase configuration
 var firebaseConfig = {
     apiKey: "AIzaSyDTjMXFqGMoWs8zsxC5EGaTNCl2SWVb75M",
@@ -22,8 +41,6 @@ $("#submit-btn").on("click", function(event){
     
     console.log("workoutInterval", workoutInterval);
     console.log("restInterval", restInterval);
-    
-    
     
     database.ref().push({
         workoutInterval: workoutInterval,
@@ -71,3 +88,65 @@ database.ref().on("child_added", function(snapshot){
 }, function(errorObject){
     console.log("Errors handled:" + errorObject.code);
 });
+
+//variable that holds our setInterval to run the stopwatch
+var interval;
+
+var workoutInterval;
+var restInterval;
+
+//prevents clock from speeding up
+var clockRunning = false;
+var workingOut = true;
+
+//setInterval starts count and sets the clock to running
+function start(){
+
+    if(!clockRunning){
+        interval = setInterval(countdown, 1000);
+        clockRunning = true;
+    }
+}
+
+//decrements workout interval time first, and once it hits zero, moves on to decrement the rest interval time 
+function countdown(){
+    if (workingOut) {
+        workoutTotalSeconds--;
+
+        //get the current time and display it
+        // var convertedWorkoutInterval = timeConverter(workoutInterval);
+        var seconds = workoutTotalSeconds;
+        var duration = moment.duration(seconds, 'seconds');
+        var formattedWorkout = duration.format("hh:mm:ss");
+        console.log(formattedWorkout);
+
+        //display the countdown
+        $("#workoutInterval-display").text(formattedWorkout);
+
+        if (workoutTotalSeconds === 0) {
+            workingOut = false;
+        }
+    }
+    else {
+        //decrements rest time
+        restTotalSeconds--;
+
+        //get the current time and display it
+        // var convertedRestInterval = timeConverter(restInterval);
+        var seconds = restTotalSeconds;
+        var duration = moment.duration(seconds, 'seconds');
+        var formattedRest = duration.format("hh:mm:ss");
+        console.log(formattedRest);
+
+        //display the countdown
+        $("#restInterval-display").text(formattedRest);
+
+    }
+    
+}
+
+//clearInterval stops the count and sets clock to not running
+function pause (){
+    clearInterval(interval);
+    clockRunning = false;
+}
