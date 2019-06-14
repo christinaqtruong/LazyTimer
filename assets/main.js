@@ -79,10 +79,10 @@ database.ref().on("child_added", function(snapshot){
     console.log("These are the total resting seconds: " + restTotalSeconds + ".")
 
     //display on HTML
-    $("#workoutInterval-display").text(sv.workoutInterval);
+    $("#workoutInterval-display").text("Workout Timer: " + sv.workoutInterval);
     console.log("This is the workout display: " + sv.workoutInterval);
 
-    $("#restInterval-display").text(sv.restInterval);
+    $("#restInterval-display").text("Rest Timer: " + sv.restInterval);
     console.log("This is the resting display: " + sv.restInterval);
 
 }, function(errorObject){
@@ -147,7 +147,7 @@ function countdown(){
         console.log(displayWorkout);
 
         //display the countdown
-        $("#workoutInterval-display").text(displayWorkout);
+        $("#workoutInterval-display").text("Workout Timer: " + displayWorkout);
 
         if (workoutTotalSeconds === 0) {
             workingOut = false;
@@ -167,7 +167,7 @@ function countdown(){
         console.log(displayRest);
 
         //display the countdown
-        $("#restInterval-display").text(displayRest);
+        $("#restInterval-display").text("Rest Timer: " + displayRest);
 
         //once resting time hits zero, either repeat the function or stop the timer
         if(restTotalSeconds === 0) {
