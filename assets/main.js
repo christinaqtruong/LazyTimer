@@ -31,3 +31,43 @@ $("#submit-btn").on("click", function(event){
         dateAdded: firebase.database.ServerValue.TIMESTAMP
     });
 });
+
+database.ref().on("child_added", function(snapshot){
+    //stored snapshot value in a variable
+    var sv = snapshot.val();
+
+    console.log(sv.workoutInterval);
+    console.log(sv.restInterval);
+
+    //splits user input by the : into minutes and seconds, and turns them from string into numbers for the workout interval
+    var workoutIntervalMinutes = parseInt(sv.workoutInterval.split(":")[0]);
+    var workoutIntervalSeconds = parseInt(sv.workoutInterval.split(":")[1]);
+
+    console.log("workoutIntervalMinutes", workoutIntervalMinutes);
+    console.log("workoutIntervalSeconds", workoutIntervalSeconds);
+
+    //converts minutes into seconds and adds it to seconds for total workout duration in seconds
+    workoutTotalSeconds = (workoutIntervalMinutes * 60) + workoutIntervalSeconds
+    console.log("workoutTotalSeconds", workoutTotalSeconds);
+
+    //splits user input by the : into minutes and seconds and turns them from string into numbers for the rest interval
+    var restIntervalMinutes = parseInt(sv.restInterval.split(":")[0]);
+    var restIntervalSeconds = parseInt(sv.restInterval.split(":")[1]);
+    console.log("These are the resting minutes: " + restIntervalMinutes + ".")
+    console.log("These are the resting seconds: " + restIntervalSeconds + ".")
+
+
+    //converts minutes into seconds and adds it to seconds for total workout duration in seconds
+    restTotalSeconds = (restIntervalMinutes * 60) + workoutIntervalSeconds
+    console.log("These are the total resting seconds: " + restTotalSeconds + ".")
+
+    //display on HTML
+    $("#workoutInterval-display").text(sv.workoutInterval);
+    console.log("This is the workout display: " + sv.workoutInterval);
+
+    $("#restInterval-display").text(sv.restInterval);
+    console.log("This is the resting display: " + sv.restInterval);
+
+}, function(errorObject){
+    console.log("Errors handled:" + errorObject.code);
+});
