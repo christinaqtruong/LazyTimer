@@ -108,6 +108,27 @@ function start(){
     }
 }
 
+//converts the time from seconds into a format for display
+function timeConverter(t){
+    var minutes = Math.floor(t/60);
+    var seconds = t - (minutes * 60);
+
+    if (seconds < 10) {
+        seconds = "0" + seconds
+    }
+
+    if (minutes === 0) {
+        minutes = "00";
+    }
+
+    else if (minutes < 10) {
+        minutes = "0" + minutes
+    }
+
+
+    return minutes + ":" + seconds;
+}
+
 //decrements workout interval time first, and once it hits zero, moves on to decrement the rest interval time 
 function countdown(){
     if (workingOut) {
@@ -120,8 +141,11 @@ function countdown(){
         var formattedWorkout = duration.format("hh:mm:ss");
         console.log(formattedWorkout);
 
+        var displayWorkout = timeConverter(formattedWorkout);
+        console.log(displayWorkout);
+
         //display the countdown
-        $("#workoutInterval-display").text(formattedWorkout);
+        $("#workoutInterval-display").text(displayWorkout);
 
         if (workoutTotalSeconds === 0) {
             workingOut = false;
@@ -138,8 +162,11 @@ function countdown(){
         var formattedRest = duration.format("hh:mm:ss");
         console.log(formattedRest);
 
+        var displayRest = timeConverter(formattedRest);
+        console.log(displayRest);
+
         //display the countdown
-        $("#restInterval-display").text(formattedRest);
+        $("#restInterval-display").text(displayRest);
 
     }
     
