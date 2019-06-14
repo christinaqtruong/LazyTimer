@@ -97,7 +97,6 @@ var restInterval;
 
 //prevents clock from speeding up
 var clockRunning = false;
-var workingOut = true;
 
 //setInterval starts count and sets the clock to running
 function start(){
@@ -129,13 +128,16 @@ function timeConverter(t){
     return minutes + ":" + seconds;
 }
 
+//variables to control when workout countdown starts/stops and rest countdown starts/stops
+var workingOut = true;
+var resting = true;
+
 //decrements workout interval time first, and once it hits zero, moves on to decrement the rest interval time 
 function countdown(){
     if (workingOut) {
         workoutTotalSeconds--;
 
         //get the current time and display it
-        // var convertedWorkoutInterval = timeConverter(workoutInterval);
         var seconds = workoutTotalSeconds;
         var duration = moment.duration(seconds, 'seconds');
         var formattedWorkout = duration.format("hh:mm:ss");
@@ -156,7 +158,6 @@ function countdown(){
         restTotalSeconds--;
 
         //get the current time and display it
-        // var convertedRestInterval = timeConverter(restInterval);
         var seconds = restTotalSeconds;
         var duration = moment.duration(seconds, 'seconds');
         var formattedRest = duration.format("hh:mm:ss");
@@ -168,7 +169,12 @@ function countdown(){
         //display the countdown
         $("#restInterval-display").text(displayRest);
 
-    }
+        //once resting time hits zero, either repeat the function or stop the timer
+        if(restTotalSeconds === 0) {
+            clearInterval(interval);
+        }
+
+    };
     
 }
 
