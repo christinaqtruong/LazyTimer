@@ -34,14 +34,35 @@ var database = firebase.database();
 
 //clicking submit button grab input values and pushes it to firebase
 $("#submit-btn").on("click", function(event){
+    
+    //prevents default submit button function
     event.preventDefault();
     
-    workoutInterval = $("#workoutInterval-input").val().trim();
-    restInterval = $("#restInterval-input").val().trim();
+    //variable for checking workout interval input value
+    var workoutInput = $("#workoutInterval-input").val();
+
+    //if there is not input value, set the workout interval to 00:00 by default, else take the user input
+    if(workoutInput === ""){
+        console.log("No Workout Interval set")
+        workoutInterval = "00:00";
+    } else {
+        workoutInterval = $("#workoutInterval-input").val().trim();
+        console.log("workoutInterval", workoutInterval);
+    }
     
-    console.log("workoutInterval", workoutInterval);
-    console.log("restInterval", restInterval);
-    
+    //variable for checking workout interval input value
+    var restInput = $("#restInterval-input").val();
+
+    //if there is not input value, set the rest interval to 00:00 by default, else take the user input
+    if(restInput === ""){
+        console.log("No rest Interval set")
+        restInterval = "00:00";
+    } else {
+        restInterval = $("#workoutInterval-input").val().trim();
+        console.log("restInterval", restInterval);
+    }
+
+    //grab the user inputs and shove it up to firebase
     database.ref().push({
         workoutInterval: workoutInterval,
         restInterval: restInterval,
@@ -147,7 +168,7 @@ function countdown(){
         console.log(displayWorkout);
 
         //display the countdown
-        $("#workoutInterval-display").text("Workout Timer: " + displayWorkout);
+        $("#workoutInterval-display").text(displayWorkout);
 
         if (workoutTotalSeconds === 0) {
             workingOut = false;
@@ -167,7 +188,7 @@ function countdown(){
         console.log(displayRest);
 
         //display the countdown
-        $("#restInterval-display").text("Rest Timer: " + displayRest);
+        $("#restInterval-display").text(displayRest);
 
         //once resting time hits zero, either repeat the function or stop the timer
         if(restTotalSeconds === 0) {
