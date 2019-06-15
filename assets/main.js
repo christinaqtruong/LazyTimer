@@ -35,11 +35,13 @@ var database = firebase.database();
 //clicking submit button grab input values and pushes it to firebase
 $("#submit-btn").on("click", function(event){
     
+    console.log("The submit button was pressed")
+
     //prevents default submit button function
     event.preventDefault();
     
     //variable for checking workout interval input value
-    var workoutInput = $("#workoutInterval-input").val();
+    var workoutInput = $("#workoutInterval-input").val().trim();
 
     //if there is not input value, set the workout interval to 00:00 by default, else take the user input
     if(workoutInput === ""){
@@ -47,19 +49,19 @@ $("#submit-btn").on("click", function(event){
         workoutInterval = "00:00";
     } else {
         workoutInterval = $("#workoutInterval-input").val().trim();
-        console.log("workoutInterval", workoutInterval);
+        console.log("The user has set the Workout Interval to: ", workoutInterval);
     }
     
     //variable for checking workout interval input value
-    var restInput = $("#restInterval-input").val();
+    var restInput = $("#restInterval-input").val().trim();
 
     //if there is not input value, set the rest interval to 00:00 by default, else take the user input
     if(restInput === ""){
         console.log("No rest Interval set")
         restInterval = "00:00";
     } else {
-        restInterval = $("#workoutInterval-input").val().trim();
-        console.log("restInterval", restInterval);
+        restInterval = $("#restInterval-input").val().trim();
+        console.log("The user has set the Rest Interval to: ", restInterval);
     }
 
     //grab the user inputs and shove it up to firebase
@@ -68,6 +70,8 @@ $("#submit-btn").on("click", function(event){
         restInterval: restInterval,
         dateAdded: firebase.database.ServerValue.TIMESTAMP
     });
+
+    
 });
 
 database.ref().on("child_added", function(snapshot){
@@ -81,12 +85,12 @@ database.ref().on("child_added", function(snapshot){
     var workoutIntervalMinutes = parseInt(sv.workoutInterval.split(":")[0]);
     var workoutIntervalSeconds = parseInt(sv.workoutInterval.split(":")[1]);
 
-    console.log("workoutIntervalMinutes", workoutIntervalMinutes);
-    console.log("workoutIntervalSeconds", workoutIntervalSeconds);
+    console.log("These are the workout minutes", workoutIntervalMinutes);
+    console.log("These are the workout seconds", workoutIntervalSeconds);
 
     //converts minutes into seconds and adds it to seconds for total workout duration in seconds
     workoutTotalSeconds = (workoutIntervalMinutes * 60) + workoutIntervalSeconds
-    console.log("workoutTotalSeconds", workoutTotalSeconds);
+    console.log("These are the total workout seconds", workoutTotalSeconds);
 
     //splits user input by the : into minutes and seconds and turns them from string into numbers for the rest interval
     var restIntervalMinutes = parseInt(sv.restInterval.split(":")[0]);
@@ -95,8 +99,8 @@ database.ref().on("child_added", function(snapshot){
     console.log("These are the resting seconds: " + restIntervalSeconds + ".")
 
 
-    //converts minutes into seconds and adds it to seconds for total workout duration in seconds
-    restTotalSeconds = (restIntervalMinutes * 60) + workoutIntervalSeconds
+    //converts minutes into seconds and adds it to seconds for total rest duration in seconds
+    restTotalSeconds = (restIntervalMinutes * 60) + restIntervalSeconds
     console.log("These are the total resting seconds: " + restTotalSeconds + ".")
 
     //display on HTML
