@@ -7,6 +7,7 @@ form{
     width: fit-content;
     margin: 10px auto;
     text-align: center;
+    margin-bottom: 2em;
 }
 
 .without_ampm::-webkit-datetime-edit-ampm-field {
@@ -24,4 +25,25 @@ input[type=time]::-webkit-clear-button {
 
 .timer{
     margin: 10px auto;
+}
+
+#headingOne{
+    text-align: center;
+    padding: 3px 5px;
+}
+
+#jumbotron{
+    text-align: center;
+    background-color: #3D9970;
+    color: #e9ecef;
+}
+
+#startTimer-btn, #reset-btn, #pause-btn, #submit-btn{
+    background-color: #3D9970;
+    border-color: rgb(58, 187, 133);
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition-property: color, background-color, border-color, box-shadow;
+    transition-duration: 0.15s, 0.15s, 0.15s, 0.15s;
+    transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out;
+    transition-delay: 0s, 0s, 0s, 0s;
 }

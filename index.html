@@ -31,6 +31,14 @@
 
 <body>
 
+<!-- App Title -->
+<div id="jumbotron" class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Lazy Timer</h1>
+            <p class="lead">Interval training made easy.</p>
+        </div>
+        </div>
+
 <!-- container for the interval displays and their buttons -->
 <div class="display">
 
@@ -54,31 +62,47 @@
 </div>
 <!-- end of timer displays/button container -->
 
-<!-- Time Picker -->
-<form>
-    <!-- workout interval input form -->
-    <div class="form-group">
-      <label for="workoutInterval">Enter workout time here</label>
-      <input type="text" class="form-control" id="workoutInterval-input" placeholder="00:00"><small id="timeFormat" class="form-text text-muted">(mm:ss)</small>
+<!-- Collapsible Timer Display Start -->
+<div class="accordion" id="accordionExample">
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h2 class="mb-0">
+          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" display="text-align: center;">
+            Enter Time Intervals
+          </button>
+        </h2>
+      </div>
+      <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div class="card-body">
+            <!-- Time Picker Container-->
+            <form>
+                <!-- workout interval input form -->
+                <div class="form-group">
+                <label for="workoutInterval">Enter workout time here</label>
+                <input type="text" class="form-control" id="workoutInterval-input" placeholder="00:00"><small id="timeFormat" class="form-text text-muted">(mm:ss)</small>
+                </div>
+
+                <!-- rest interval input form -->
+                <div class="form-group">
+                <label for="restInterval">Enter rest time here</label>
+                <input type="text" class="form-control" id="restInterval-input" placeholder="00:00"> <small id="timeFormat" class="form-text text-muted">(mm:ss)</small>
+                </div>
+
+                <!-- Check to loop the intervals until stop button is pressed -->
+                <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="intervalLoop-input">
+                <label class="form-check-label" for="intervalLoop">Check to repeat time intervals until stopped</label>
+                </div>
+
+                <!-- Button to push timer data to firebase -->
+                <button type="submit" class="btn btn-primary" id="submit-btn">Submit</button>
+            </form>
+            <!-- End of Time Picker Container -->
+            
+        </div>
+      </div>
     </div>
-
-    <!-- rest interval input form -->
-    <div class="form-group">
-      <label for="restInterval">Enter rest time here</label>
-      <input type="text" class="form-control" id="restInterval-input" placeholder="00:00"> <small id="timeFormat" class="form-text text-muted">(mm:ss)</small>
-    </div>
-
-    <!-- Check to loop the intervals until stop button is pressed -->
-    <div class="form-check">
-      <input type="checkbox" class="form-check-input" id="intervalLoop-input">
-      <label class="form-check-label" for="intervalLoop">Check to repeat time intervals until stopped</label>
-    </div>
-
-    <!-- Button to push timer data to firebase -->
-    <button type="submit" class="btn btn-primary" id="submit-btn">Submit</button>
-  </form>
-
-  
+<!-- Collapsible Timer Display End -->
 
 
 <!-- JavaScript -->
