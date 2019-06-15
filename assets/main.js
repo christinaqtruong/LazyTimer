@@ -79,10 +79,10 @@ database.ref().on("child_added", function(snapshot){
     console.log("These are the total resting seconds: " + restTotalSeconds + ".")
 
     //display on HTML
-    $("#workoutInterval-display").text("Workout Timer: " + sv.workoutInterval);
+    $("#workoutInterval-display").text(sv.workoutInterval);
     console.log("This is the workout display: " + sv.workoutInterval);
 
-    $("#restInterval-display").text("Rest Timer: " + sv.restInterval);
+    $("#restInterval-display").text(sv.restInterval);
     console.log("This is the resting display: " + sv.restInterval);
 
 }, function(errorObject){

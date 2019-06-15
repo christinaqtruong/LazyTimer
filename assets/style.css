@@ -14,19 +14,6 @@ form{
     margin-bottom: 2em;
 }
 
-.without_ampm::-webkit-datetime-edit-ampm-field {
-    display: none;
-}
-
-input[type=time]::-webkit-clear-button {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -o-appearance: none;
-    -ms-appearance:none;
-    appearance: none;
-    margin: -10px; 
-}
-
 .timer{
     margin: 10px auto;
 }
@@ -50,4 +37,18 @@ input[type=time]::-webkit-clear-button {
     transition-duration: 0.15s, 0.15s, 0.15s, 0.15s;
     transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out;
     transition-delay: 0s, 0s, 0s, 0s;
+}
+
+#btn-link{
+    color:#3D9970;
+}
+
+#workoutInterval-display{
+    font-size: 2em;
+    margin: 10px auto;
+}
+
+#restInterval-display{
+    font-size: 2em;
+    margin: 10px auto;
 }

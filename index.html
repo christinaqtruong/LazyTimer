@@ -45,8 +45,10 @@
     <!-- timer container -->
     <div class="timer">
         <!-- Displays Workout/Rest Intervals -->
-        <div id="workoutInterval-display">Workout Timer: 00:00</div>
-        <div id="restInterval-display">Rest Timer: 00:00</div>
+        <div class="text">Workout Timer:</div>
+        <div id="workoutInterval-display">00:00</div>
+        <div class="text">Rest Timer:</div>
+        <div id="restInterval-display">>00:00</div>
     </div>
     <!-- end of timer container -->
 
@@ -67,8 +69,8 @@
     <div class="card">
       <div class="card-header" id="headingOne">
         <h2 class="mb-0">
-          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" display="text-align: center;">
-            Enter Time Intervals
+          <button id="btn-link" class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" display="text-align: center;">
+            Set Timer
           </button>
         </h2>
       </div>
@@ -91,7 +93,7 @@
                 <!-- Check to loop the intervals until stop button is pressed -->
                 <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="intervalLoop-input">
-                <label class="form-check-label" for="intervalLoop">Check to repeat time intervals until stopped</label>
+                <label class="form-check-label" for="intervalLoop">Check to repeat time intervals until 'Stop' is pressed</label>
                 </div>
 
                 <!-- Button to push timer data to firebase -->
