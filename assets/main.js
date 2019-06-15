@@ -78,15 +78,15 @@ database.ref().on("child_added", function(snapshot){
     //stored snapshot value in a variable
     var sv = snapshot.val();
 
-    console.log(sv.workoutInterval);
-    console.log(sv.restInterval);
+    console.log("This is the Workout Interval string pulled from firebase: " + sv.workoutInterval);
+    console.log("This is the Rest Interval string pulled from firebase: " + sv.restInterval);
 
     //splits user input by the : into minutes and seconds, and turns them from string into numbers for the workout interval
     var workoutIntervalMinutes = parseInt(sv.workoutInterval.split(":")[0]);
     var workoutIntervalSeconds = parseInt(sv.workoutInterval.split(":")[1]);
 
-    console.log("These are the workout minutes", workoutIntervalMinutes);
-    console.log("These are the workout seconds", workoutIntervalSeconds);
+    console.log("These are the workout minutes: ", workoutIntervalMinutes);
+    console.log("These are the workout seconds: ", workoutIntervalSeconds);
 
     //converts minutes into seconds and adds it to seconds for total workout duration in seconds
     workoutTotalSeconds = (workoutIntervalMinutes * 60) + workoutIntervalSeconds
@@ -95,13 +95,13 @@ database.ref().on("child_added", function(snapshot){
     //splits user input by the : into minutes and seconds and turns them from string into numbers for the rest interval
     var restIntervalMinutes = parseInt(sv.restInterval.split(":")[0]);
     var restIntervalSeconds = parseInt(sv.restInterval.split(":")[1]);
-    console.log("These are the resting minutes: " + restIntervalMinutes + ".")
-    console.log("These are the resting seconds: " + restIntervalSeconds + ".")
+    console.log("These are the resting minutes: ", restIntervalMinutes)
+    console.log("These are the resting seconds: ", restIntervalSeconds)
 
 
     //converts minutes into seconds and adds it to seconds for total rest duration in seconds
     restTotalSeconds = (restIntervalMinutes * 60) + restIntervalSeconds
-    console.log("These are the total resting seconds: " + restTotalSeconds + ".")
+    console.log("These are the total resting seconds: ", restTotalSeconds)
 
     //display on HTML
     $("#workoutInterval-display").text(sv.workoutInterval);
@@ -162,14 +162,14 @@ function countdown(){
     if (workingOut) {
         workoutTotalSeconds--;
 
-        //get the current time and display it
+        //grab the total seconds and change stick it into Moment as seconds, and then use moment to reformat it into mm:ss format
         var seconds = workoutTotalSeconds;
         var duration = moment.duration(seconds, 'seconds');
         var formattedWorkout = duration.format("hh:mm:ss");
-        console.log(formattedWorkout);
+        console.log("This is the total workout seconds reformatted for display: " + formattedWorkout);
 
         var displayWorkout = timeConverter(formattedWorkout);
-        console.log(displayWorkout);
+        console.log("This is the total workout seconds changed to mins/sec display formatting: " + displayWorkout);
 
         //display the countdown
         $("#workoutInterval-display").text(displayWorkout);
@@ -186,10 +186,10 @@ function countdown(){
         var seconds = restTotalSeconds;
         var duration = moment.duration(seconds, 'seconds');
         var formattedRest = duration.format("hh:mm:ss");
-        console.log(formattedRest);
+        console.log("This is the total Rest seconds reformatted for display: " + formattedRest);
 
         var displayRest = timeConverter(formattedRest);
-        console.log(displayRest);
+        console.log("This is the total workout seconds reformatted into the timer display format: " + displayRest);
 
         //display the countdown
         $("#restInterval-display").text(displayRest);
