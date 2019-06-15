@@ -1,9 +1,10 @@
-//when window loads, it initiates all the button functions
-window.onload = function(){
     //click events
     $(document).on('click', "#startTimer-btn", function(){
         //starts timer
         start();
+        console.log("The timer has been started!");
+
+        workingOut = true;
     })
 
     // $(document).on('click', "#reset-btn", function(){
@@ -11,11 +12,11 @@ window.onload = function(){
     //     reset();
     // })
 
-    // $(document).on('click', "#pause-btn", function(){
-    //     //resets timer
-    //     pause();
-    // })
-};
+    $(document).on('click', "#pause-btn", function(){
+        //pauses timer
+        pause();
+    })
+
 
 // My web app's Firebase configuration
 var firebaseConfig = {
@@ -129,6 +130,7 @@ function start(){
     if(!clockRunning){
         interval = setInterval(countdown, 1000);
         clockRunning = true;
+        console.log("Is the clock running? " + clockRunning);
     }
 }
 
@@ -197,6 +199,8 @@ function countdown(){
         //once resting time hits zero, either repeat the function or stop the timer
         if(restTotalSeconds === 0) {
             clearInterval(interval);
+            clockRunning = false;
+            console.log("Is the clock still running? " + clockRunning);
         }
 
     };
@@ -207,4 +211,5 @@ function countdown(){
 function pause (){
     clearInterval(interval);
     clockRunning = false;
+    console.log("Is the clock running? " + clockRunning);
 }
