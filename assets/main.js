@@ -3,8 +3,6 @@
         //starts timer
         start();
         console.log("The timer has been started!");
-
-        workingOut = true;
     })
 
     // $(document).on('click', "#reset-btn", function(){
@@ -155,9 +153,9 @@ function timeConverter(t){
     return minutes + ":" + seconds;
 }
 
-//variables to control when workout countdown starts/stops and rest countdown starts/stops
+//this variable must be true in order for the workout timer to decrement; else it starts decrementing the resting timer
 var workingOut = true;
-var resting = true;
+
 
 //decrements workout interval time first, and once it hits zero, moves on to decrement the rest interval time 
 function countdown(){
@@ -198,9 +196,15 @@ function countdown(){
 
         //once resting time hits zero, either repeat the function or stop the timer
         if(restTotalSeconds === 0) {
+            //clears the interval so that it no longer triggers the countdown function
             clearInterval(interval);
+
+            //sets clockRunning to false so that clicking the start button will set the interval function to call the countdown function
             clockRunning = false;
             console.log("Is the clock still running? " + clockRunning);
+
+            //enables workout timer to decrement if start is hit again
+            workingOut = true;
         }
 
     };
