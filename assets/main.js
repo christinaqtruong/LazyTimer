@@ -16,6 +16,25 @@
     })
 
 
+
+
+
+    //TRIED TO FORCE INPUT FORM TO ACCEPT ONLY FOUR CHARACTERS AND INSERT A SEMICOLON BETWEEN THE FIRST AND LAST TWO CHARACTERS
+    // $(document).keyup(function () {
+    // var workoutfield = $('#workoutInterval-input').val().split(""); 
+    // console.log(workoutfield);
+
+    // var winput = $('#workoutInterval-input').val();
+    // winput = workoutfield[0] + workoutfield[1] + ":" + workoutfield[2] + workoutfield[3];
+    // console.log(winput);
+    // $('#workoutInterval-input').text(winput);
+
+    // if (workoutfield.length > 4) {
+    //     workingoutfield.slice(0,5);
+    // }
+    // });
+
+
 // My web app's Firebase configuration
 var firebaseConfig = {
     apiKey: "AIzaSyDTjMXFqGMoWs8zsxC5EGaTNCl2SWVb75M",
@@ -45,7 +64,11 @@ $("#submit-btn").on("click", function(event){
     //if there is not input value, set the workout interval to 00:00 by default, else take the user input
     if(workoutInput === ""){
         console.log("No Workout Interval set")
+        
+        //set time to zero and set working out variable to false to prevent working out timer from decrementing during countdown function
         workoutInterval = "00:00";
+        workingOut = false;
+
     } else {
         workoutInterval = $("#workoutInterval-input").val().trim();
         console.log("The user has set the Workout Interval to: ", workoutInterval);
@@ -115,7 +138,6 @@ database.ref().on("child_added", function(snapshot){
 
 //variable that holds our setInterval to run the stopwatch
 var interval;
-
 var workoutInterval;
 var restInterval;
 
@@ -156,40 +178,39 @@ function timeConverter(t){
 //this variable must be true in order for the workout timer to decrement; else it starts decrementing the resting timer
 var workingOut = true;
 
-
 //decrements workout interval time first, and once it hits zero, moves on to decrement the rest interval time 
 function countdown(){
-    if (workingOut) {
-        workoutTotalSeconds--;
+	
+	// Conditional checker to handle user input = 00 vs non-00 case 
+	if( workoutTotalSeconds === 0 ){
+		workingOut = false;
+	}
+	else{
+		workingOut = true; 
+	}
 
-        //grab the total seconds and change stick it into Moment as seconds, and then use moment to reformat it into mm:ss format
-        var seconds = workoutTotalSeconds;
-        var duration = moment.duration(seconds, 'seconds');
-        var formattedWorkout = duration.format("hh:mm:ss");
-        console.log("This is the total workout seconds reformatted for display: " + formattedWorkout);
+	////////////
+	
+	if (workingOut) {
+		workoutTotalSeconds--;
+		console.log(workoutTotalSeconds);
 
-        var displayWorkout = timeConverter(formattedWorkout);
-        console.log("This is the total workout seconds changed to mins/sec display formatting: " + displayWorkout);
+		var displayWorkout = timeConverter(workoutTotalSeconds);
+		console.log("This is the total workout seconds display: " + displayWorkout);
 
-        //display the countdown
+		//display the countdown
         $("#workoutInterval-display").text(displayWorkout);
-
-        if (workoutTotalSeconds === 0) {
+        if(workoutTotalSeconds === 0){
             workingOut = false;
-        }
-    }
-    else {
-        //decrements rest time
+        }	
+	}
+	
+	//decrements rest time
+    if(!workingOut){
         restTotalSeconds--;
 
-        //get the current time and display it
-        var seconds = restTotalSeconds;
-        var duration = moment.duration(seconds, 'seconds');
-        var formattedRest = duration.format("hh:mm:ss");
-        console.log("This is the total Rest seconds reformatted for display: " + formattedRest);
-
-        var displayRest = timeConverter(formattedRest);
-        console.log("This is the total workout seconds reformatted into the timer display format: " + displayRest);
+        var displayRest = timeConverter(restTotalSeconds);
+        console.log("This is the total rest seconds timer display: " + displayRest);
 
         //display the countdown
         $("#restInterval-display").text(displayRest);
@@ -206,9 +227,7 @@ function countdown(){
             //enables workout timer to decrement if start is hit again
             workingOut = true;
         }
-
-    };
-    
+    }
 }
 
 //clearInterval stops the count and sets clock to not running
