@@ -215,6 +215,9 @@ function countdown(){
         //display the countdown
         $("#restInterval-display").text(displayRest);
 
+        //////////////NEED TO FIGURE OUT HOW TO INCORPORATE IF FUNCTION IF REST TOTAL SECONDS STARTS AT ZERO, IT NEEDS TO NOT DECREMENT and 
+        //FIX BUG WHERE REST TIMER STARTS EXACTLY AS THE WORKOUT TIMER HITS 0
+
         //once resting time hits zero, either repeat the function or stop the timer
         if(restTotalSeconds === 0) {
             //clears the interval so that it no longer triggers the countdown function
