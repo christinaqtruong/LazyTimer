@@ -5,10 +5,10 @@
         console.log("The timer has been started!");
     })
 
-    // $(document).on('click', "#reset-btn", function(){
-    //     //resets timer
-    //     reset();
-    // })
+    $(document).on('click', "#reset-btn", function(){
+        //resets timer
+        reset();
+    })
 
     $(document).on('click', "#pause-btn", function(){
         //pauses timer
@@ -216,4 +216,15 @@ function pause (){
     clearInterval(interval);
     clockRunning = false;
     console.log("Is the clock running? " + clockRunning);
+}
+
+function reset(){
+    clearInterval(interval);
+    clockRunning = false;
+    workingOut = true;
+    workoutInterval = "00:00";
+    restInterval = "00:00";
+    $("#workoutInterval-display").text("00:00");
+    $("#restInterval-display").text("00:00");
+
 }
