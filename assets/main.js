@@ -206,7 +206,7 @@ function countdown(){
 	}
 	
 	//decrements rest time
-    if(!workingOut){
+    if(!workingOut && restTotalSeconds != 0){
         restTotalSeconds--;
 
         var displayRest = timeConverter(restTotalSeconds);
@@ -230,6 +230,17 @@ function countdown(){
             //enables workout timer to decrement if start is hit again
             workingOut = true;
         }
+    } else {
+        console.log("Rest timer is starting at zero.");
+        //clears the interval so that it no longer triggers the countdown function
+        clearInterval(interval);
+
+        //sets clockRunning to false so that clicking the start button will set the interval function to call the countdown function
+        clockRunning = false;
+        console.log("Is the clock still running? " + clockRunning);
+
+        //enables workout timer to decrement if start is hit again
+        workingOut = true;
     }
 }
 
