@@ -311,23 +311,6 @@ var countdown = function() {
         $("#workoutInterval-display").text(displayWorkout);
 
 
-
-
-        //////////////NEED TO FIGURE OUT HOW TO INCORPORATE IF FUNCTION IF REST TOTAL SECONDS STARTS AT ZERO, IT NEEDS TO NOT DECREMENT and 
-        //FIX BUG WHERE REST TIMER STARTS EXACTLY AS THE WORKOUT TIMER HITS 0
-
-        //once resting time hits zero, either repeat the function or stop the timer
-        // if(restCountdown === 0) {
-        //     //clears the interval so that it no longer triggers the countdown function
-        //     clearInterval(interval);
-
-        //     //sets clockRunning to false so that clicking the start button will set the interval function to call the countdown function
-        //     clockRunning = false;
-        //     console.log("Is the clock still running? " + clockRunning);
-
-        //     //enables workout timer to decrement if start is hit again
-        //     workingOut = true;
-        // }
     } else if (!workingOut && restCountdown === 0) {
         console.log("Rest timer is starting at zero.");
         
@@ -372,14 +355,12 @@ function reset(){
     restCountdown = restTotalSeconds;
     clockRunning = false;
     workingOut = true;
-    // workoutInterval = "00:00";
-    // restInterval = "00:00";
+    
     $("#workoutInterval-display").text(timeConverter(workoutCountdown));
     $("#restInterval-display").text(timeConverter(restCountdown));
 
     //condition checks
     console.log("Are we working out? " + workingOut);
     console.log("Is the timer running? " + clockRunning);
-    // console.log("What is the current work out interval? " + workoutInterval);
-    // console.log("What is the current rest interval? " + restInterval);
+    
 }
