@@ -68,7 +68,7 @@
         restForm.on("submit", function(event) {
             event.preventDefault();
 
-                    //variable for checking workout interval input value
+            //variable for checking workout interval input value
             var restInput = newInput.val();
             console.log("the user typed in the time: " + newInput.val());
 
@@ -93,25 +93,6 @@
             });
         });
     })
-
-
-
-
-
-    //TRIED TO FORCE INPUT FORM TO ACCEPT ONLY FOUR CHARACTERS AND INSERT A SEMICOLON BETWEEN THE FIRST AND LAST TWO CHARACTERS
-    // $(document).keyup(function () {
-    // var workoutfield = $('#workoutInterval-input').val().split(""); 
-    // console.log(workoutfield);
-
-    // var winput = $('#workoutInterval-input').val();
-    // winput = workoutfield[0] + workoutfield[1] + ":" + workoutfield[2] + workoutfield[3];
-    // console.log(winput);
-    // $('#workoutInterval-input').text(winput);
-
-    // if (workoutfield.length > 4) {
-    //     workingoutfield.slice(0,5);
-    // }
-    // });
 
 
 // My web app's Firebase configuration
@@ -224,12 +205,12 @@ database.ref().on("child_added", function(snapshot){
 
     //display on HTML
     // $("#workoutInterval-display").text(sv.workoutInterval);
-    var workoutDiv = $("<div id='workoutInterval-display'>").text(sv.workoutInterval);
+    var workoutDiv = $("<div id='workoutInterval-display' class='notRunning'>").text(sv.workoutInterval);
     $("#workout-wrapper").empty().html(workoutDiv);
     // console.log("This is the workout display: " + sv.workoutInterval);
 
     // $("#restInterval-display").text(sv.restInterval);
-    var restDiv = $("<div id='restInterval-display'>").text(sv.restInterval);
+    var restDiv = $("<div id='restInterval-display' class='notRunning'>").text(sv.restInterval);
     $("#rest-wrapper").empty().html(restDiv);
     // console.log("This is the resting display: " + sv.restInterval);
 
@@ -286,18 +267,27 @@ var countdown = function() {
 		console.log(workoutCountdown);
 
 		var displayWorkout = timeConverter(workoutCountdown);
-		console.log("This is the total workout seconds display: " + displayWorkout);
+        console.log("This is the total workout seconds display: " + displayWorkout);
+        
+        //changes display to active running
+        $('#workoutInterval-display').removeAttr("class");
 
 		//display the countdown
         $("#workoutInterval-display").text(displayWorkout);
         if(workoutCountdown === 0){
             workingOut = false;
+            
+            //changes display to not running gray
+            $('#workoutInterval-display').attr('class', 'notRunning');
         }	
 	}
 	
 	//decrements rest time
     else if(!workingOut && restCountdown != 0){
         restCountdown--;
+
+        //changes display to active running
+        $('#restInterval-display').removeAttr("class");
 
         var displayRest = timeConverter(restCountdown);
         console.log("This is the total rest seconds timer display: " + displayRest);
@@ -321,6 +311,8 @@ var countdown = function() {
 
         $("#restInterval-display").text(displayRest);
         
+        //changes display to not running gray
+        $('#restInterval-display').attr('class', 'notRunning');
 
         //enables workout timer to decrement if start is hit again
         workingOut = true;
