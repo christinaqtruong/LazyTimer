@@ -116,62 +116,6 @@ var restTotalSeconds;
 var workoutCountdown;
 var restCountdown;
 
-
-//clicking submit button grab input values and pushes it to firebase
-$("#submit-btn").on("click", function(event){
-    
-    console.log("The submit button was pressed")
-
-    //prevents default submit button function
-    event.preventDefault();
-    
-    //variable for checking workout interval input value
-    var workoutInput = $("#workoutInterval-input").val().trim();
-
-    //if there is not input value, set the workout interval to 00:00 by default, else take the user input
-    if(workoutInput === ""){
-        console.log("No Workout Interval set")
-        
-        //set time to zero and set working out variable to false to prevent working out timer from decrementing during countdown function
-        workoutInterval = "00:00";
-        workingOut = false;
-
-    } else {
-        workoutInterval = $("#workoutInterval-input").val().trim();
-        console.log("The user has set the Workout Interval to: ", workoutInterval);
-    }
-    
-    //variable for checking workout interval input value
-    var restInput = $("#restInterval-input").val().trim();
-
-    // check to make sure both workoutnput and restInput have a colon
-    if (!workoutInput.includes(":") || !restInput.includes(":")) {
-        console.log("User did not put in a semicolon");
-        return;
-    }
-    // else if (both sides of colons are numbers for both times)
-    
-
-
-    //if there is not input value, set the rest interval to 00:00 by default, else take the user input
-    if(restInput === ""){
-        console.log("No rest Interval set")
-        restInterval = "00:00";
-    } else {
-        restInterval = $("#restInterval-input").val().trim();
-        console.log("The user has set the Rest Interval to: ", restInterval);
-    }
-
-    //grab the user inputs and shove it up to firebase
-    database.ref().push({
-        workoutInterval: workoutInterval,
-        restInterval: restInterval,
-        dateAdded: firebase.database.ServerValue.TIMESTAMP
-    });
-
-    
-});
-
 database.ref().on("child_added", function(snapshot){
     //stored snapshot value in a variable
     var sv = snapshot.val();
@@ -262,7 +206,9 @@ var workingOut = true;
 //decrements workout interval time first, and once it hits zero, moves on to decrement the rest interval time 
 
 var countdown = function() {
-    if (workingOut) {
+
+    //if workingOut is true and the workout interval is NOT zero, then decrement the timer
+    if (workingOut && workoutCountdown != 0) {
 		workoutCountdown--;
 		console.log(workoutCountdown);
 
@@ -280,9 +226,22 @@ var countdown = function() {
             //changes display to not running gray
             $('#workoutInterval-display').attr('class', 'notRunning');
         }	
-	}
-	
-	//decrements rest time
+
+    //if working out is true and the workout timer is zero, then display the timer, but set workingOut to false
+    } if (workingOut && workoutCountdown === 0) {
+		var displayWorkout = timeConverter(workoutCountdown);
+		console.log("This is the total workout seconds display: " + displayWorkout);
+
+		//display the countdown
+        $("#workoutInterval-display").text(displayWorkout);
+        if(workoutCountdown === 0){
+            workingOut = false;
+            $('#workoutInterval-display').removeAttr('class');
+            $('#workoutInterval-display').attr('class','inactive');
+        }
+    }
+    
+    //decrements rest time if workingOut is false and the restCountdown is not zero
     else if(!workingOut && restCountdown != 0){
         restCountdown--;
 
@@ -306,6 +265,7 @@ var countdown = function() {
         
         //resets to previous timer values
         restCountdown = restTotalSeconds
+        workoutCountdown = workoutTotalSeconds
 
         var displayRest = timeConverter(restCountdown);
 
