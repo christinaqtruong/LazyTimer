@@ -1,6 +1,8 @@
 # LazyTimer
 The one-stop timer for interval training. Just set the intervals and start working out.
 
+https://christinaqtruong.github.io/LazyTimer/
+
 #Collaborators
 Christina Truong
 

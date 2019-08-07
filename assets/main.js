@@ -23,6 +23,23 @@ $(document).on("click", "#pause-btn", function() {
 //Global Variables:
 var regex = new RegExp("[a-zA-Z]+");
 
+//setInterval starts count and sets the clock to running
+var workoutTotalSeconds;
+var restTotalSeconds;
+var workoutCountdown;
+var restCountdown;
+
+//variable that holds our setInterval to run the stopwatch
+var interval;
+var workoutInterval;
+var restInterval;
+
+//prevents clock from speeding up
+var clockRunning = false;
+
+//this variable must be true in order for the workout timer to decrement; else it starts decrementing the resting timer
+var workingOut = true;
+
 $(document).on("click", "div#workoutInterval-display", function() {
   console.log("You pressed workoutInterval-display");
   //check if other input field has a form or div
@@ -177,12 +194,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
 
-//setInterval starts count and sets the clock to running
-var workoutTotalSeconds;
-var restTotalSeconds;
-var workoutCountdown;
-var restCountdown;
-
+//When a child is added to firebase, initiate the following:
 database.ref().on(
   "child_added",
   function(snapshot) {
@@ -239,14 +251,7 @@ database.ref().on(
   }
 );
 
-//variable that holds our setInterval to run the stopwatch
-var interval;
-var workoutInterval;
-var restInterval;
-
-//prevents clock from speeding up
-var clockRunning = false;
-
+//start function:
 function start() {
   if (!clockRunning) {
     interval = setInterval(countdown, 1000);
@@ -273,8 +278,6 @@ function timeConverter(t) {
   return minutes + ":" + seconds;
 }
 
-//this variable must be true in order for the workout timer to decrement; else it starts decrementing the resting timer
-var workingOut = true;
 
 //decrements workout interval time first, and once it hits zero, moves on to decrement the rest interval time
 
