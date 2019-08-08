@@ -1,16 +1,17 @@
 # LazyTimer
-The one-stop timer for interval training. Just set the intervals and start working out.
+The one-stop timer for interval training. Just set the intervals and start working out. This app allows the user to set two timers that switch back and forth automatically, allowing them to transition seamlessly between workout and rest periods during interval training without touching the timer. 
 
 https://christinaqtruong.github.io/LazyTimer/
 
 #Collaborators
 Christina Truong
 
-#Use Case
-Interval training requires setting timers, which can cause athletes to lose a lot of momentum during their workouts. This app allows the user to set two timers that cycle automatically, allowing them to transition seamlessly between workout and rest periods during interval training without touching the timer. 
 
-#User Stories
-- utilize Firebase to store and retrieve real-time data
+#Technologies
+- Firebase to store and retrieve real-time data
+- Bootstrap
+- Moment.js for time conversions
+- jQuery
 
 #Development Process
 - Goals:
