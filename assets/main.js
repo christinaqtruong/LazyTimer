@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 //click events
 $(document).on("click", "#startTimer-btn", function() {
   console.log("You pressed START");
@@ -181,7 +183,7 @@ $(document).on("click", "div#restInterval-display", function() {
 
 // My web app's Firebase configuration
 var firebaseConfig = {
-  apiKey: "AIzaSyDTjMXFqGMoWs8zsxC5EGaTNCl2SWVb75M",
+  apiKey: process.env.DB_PASSWORD,
   authDomain: "lazytimer-cqmt.firebaseapp.com",
   databaseURL: "https://lazytimer-cqmt.firebaseio.com",
   projectId: "lazytimer-cqmt",
