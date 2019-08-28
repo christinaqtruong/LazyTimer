@@ -5,6 +5,7 @@ function start() {
     clockRunning = true;
   }
 }
+
 //global variables
 var time;
 var clock;
@@ -15,7 +16,7 @@ $(document).ready(function() {
     time = moment().format("hh:mm:ss A");
     $("#time").text(time);
   }
-  //  Call function with setInterval
+  //Call function with setInterval
   clock = setInterval(runningClock, 1000);
 });
 

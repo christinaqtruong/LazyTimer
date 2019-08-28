@@ -59,3 +59,8 @@ form{
 .inactive{
     color: black;
 }
+
+#workout-warning, #rest-warning{
+    font-size: 0.75em;
+    margin-bottom: 5px;
+}
