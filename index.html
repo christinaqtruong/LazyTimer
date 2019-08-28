@@ -41,10 +41,10 @@
 <body>
 
   <!-- App Title -->
-  <div id="jumbotron" class="jumbotron jumbotron-fluid">
-    <div class="container">
-      <h1 class="display-4">Lazy Timer</h1>
-      <p class="lead">Interval training made easy.</p>
+  <div id="title" class="row">
+    <div class="container col text-center">
+      <h1 class="app-name">Lazy Timer</h1>
+      <p class="byline">Interval training made easy.</p>
     </div>
   </div>
 
@@ -54,20 +54,24 @@
     <!-- timer container -->
     <div class="timer">
       <!-- Displays Workout/Rest Intervals -->
-      <div class="text">Workout Timer:</div>
-      <span id="workout-wrapper">
-        <div id="workoutInterval-display" class="notRunning">00:00</div>
-      </span>
-      <span>
-        <div id="workout-warning"></div>
-      </span>
-      <div class="text">Rest Timer:</div>
-      <span id="rest-wrapper">
-        <div id="restInterval-display">00:00</div>
-      </span>
-      <span>
-        <div id="rest-warning"></div>
-      </span>
+      <div class="workout-container">
+        <div class="workout-text">Workout Timer:</div>
+        <span id="workout-wrapper">
+          <div id="workoutInterval-display" class="notRunning">00:00</div>
+        </span>
+        <span>
+          <div id="workout-warning"></div>
+        </span>
+      </div>
+      <div class="rest-container">
+        <div class="rest-text">Rest Timer:</div>
+        <span id="rest-wrapper">
+          <div id="restInterval-display">00:00</div>
+        </span>
+        <span>
+          <div id="rest-warning"></div>
+        </span>
+      </div>
     </div>
     <!-- end of timer container -->
 
@@ -83,10 +87,10 @@
   </div>
 
   <!-- jQuery -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
   <!-- JavaScript -->
-    <script src="./assets/main.js"></script>
+  <script src="./assets/main.js"></script>
 
 
 </body>

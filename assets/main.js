@@ -262,7 +262,7 @@ function start() {
   if (!clockRunning) {
     interval = setInterval(countdown, 1000);
     clockRunning = true;
-    console.log("Is the clock running? " + clockRunning);
+    // console.log("Is the clock running? " + clockRunning);
   }
 }
 
@@ -292,17 +292,19 @@ var workingOut = true;
 var countdown = function() {
   if (workingOut && workoutCountdown != 0) {
     workoutCountdown--;
-    console.log(workoutCountdown);
+    // console.log(workoutCountdown);
+   
     $("#workoutInterval-display").removeAttr("class");
     $("#workoutInterval-display").attr("class", "active");
 
     var displayWorkout = timeConverter(workoutCountdown);
-    console.log("This is the total workout seconds display: " + displayWorkout);
+    // console.log("This is the total workout seconds display: " + displayWorkout);
 
     //display the countdown
     $("#workoutInterval-display").text(displayWorkout);
     if (workoutCountdown === 0) {
       workingOut = false;
+      
       $("#workoutInterval-display").removeAttr("class");
       $("#workoutInterval-display").attr("class", "inactive");
     }
@@ -323,6 +325,7 @@ var countdown = function() {
   //decrements rest time
   else if (!workingOut && restCountdown != 0) {
     restCountdown--;
+    
     $("#restInterval-display").removeAttr();
     $("#restInterval-display").attr("class", "active");
 
@@ -344,7 +347,7 @@ var countdown = function() {
     workoutCountdown = workoutTotalSeconds;
 
     var displayRest = timeConverter(restCountdown);
-
+    
     $("#restInterval-display").removeAttr("class");
     $("#restInterval-display").attr("class", "inactive");
 
@@ -369,10 +372,15 @@ function pause() {
   clockRunning = false;
 
   //condition checks
-  console.log("Are we working out? " + workingOut);
-  console.log("Is the timer running? " + clockRunning);
-  console.log("What is the current work out interval? " + workoutInterval);
-  console.log("What is the current rest interval? " + restInterval);
+  // console.log("Are we working out? " + workingOut);
+  // console.log("Is the timer running? " + clockRunning);
+  // console.log("What is the current work out interval? " + workoutInterval);
+  // console.log("What is the current rest interval? " + restInterval);
+
+  $(".workout-text").show();
+  $("#workoutInterval-display").show();
+  $(".rest-text").show();
+  $("#restInterval-display").show();
 }
 
 function reset() {
@@ -381,14 +389,15 @@ function reset() {
   restCountdown = restTotalSeconds;
   clockRunning = false;
   workingOut = true;
-  // workoutInterval = "00:00";
-  // restInterval = "00:00";
+
+  $("#workoutInterval-display").attr("class", "inactive");
+  $("#restInterval-display").attr("class", "inactive");
+  
   $("#workoutInterval-display").text(timeConverter(workoutCountdown));
   $("#restInterval-display").text(timeConverter(restCountdown));
 
   //condition checks
   console.log("Are we working out? " + workingOut);
   console.log("Is the timer running? " + clockRunning);
-  // console.log("What is the current work out interval? " + workoutInterval);
-  // console.log("What is the current rest interval? " + restInterval);
+  
 }
