@@ -40,24 +40,22 @@ form{
 #workoutInterval-display{
     font-size: 2em;
     margin: 10px auto;
+    border-radius: 10px;
 }
 
 #restInterval-display{
     font-size: 2em;
     margin: 10px auto;
-}
-
-.notRunning{
-    background-color: #DDDDDD;
-    color:darkgrey;
+    border-radius: 10px;
 }
 
 .active{
-    color: #3D9970;;
+    color: black;
 }
 
 .inactive{
-    color: black;
+    background-color: #DDDDDD;
+    color:darkgrey;
 }
 
 #workout-warning, #rest-warning{
