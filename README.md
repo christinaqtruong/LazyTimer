@@ -1,5 +1,5 @@
 # LazyTimer
-The one-stop timer for interval training. Just set the intervals and start working out. This app allows the user to set two timers that switch back and forth automatically, allowing them to transition seamlessly between workout and rest periods during interval training without touching the timer. 
+The one-stop timer for interval training. Just set the intervals and start working out. This app allows the user to set two timers that switch back and forth automatically, enabling them to transition between workout and rest periods during interval training without having to reset the timer. 
 
 https://christinaqtruong.github.io/LazyTimer/
 
