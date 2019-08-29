@@ -120,9 +120,11 @@ window.onload = function() {
 
   //whenever the divider with the restInterval-display ID is clicked, initiate:
   $(document).on("click", "div#restInterval-display", function() {
-    console.log("You pressed restInterval-display");
+    
     $("#workout-warning").empty();
     $("#rest-warning").empty();
+
+    reset();
 
     //check if other input field has a form or div
     if ($("#workout-wrapper").has("form")) {
@@ -334,7 +336,7 @@ var countdown = function() {
   }
 
   //decrements rest time
-  else if (!workingOut && restCountdown != 0) {
+  else if (!workingOut && restCountdown > 0) {
     restCountdown--;
     
     $("#restInterval-display").removeAttr();
@@ -353,8 +355,8 @@ var countdown = function() {
     console.log("Rest timer is starting at zero.");
 
     //resets to previous timer values
-    restCountdown = restTotalSeconds;
     workoutCountdown = workoutTotalSeconds;
+    restCountdown = restTotalSeconds;
 
     var displayRest = timeConverter(restCountdown);
     
